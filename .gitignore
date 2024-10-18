@@ -1,0 +1,27 @@
+# Virtual environment directories
+venv/
+ENV/
+env/
+
+# Python bytecode and cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment variables
+.env
+*.env
+
+# Log files
+*.log
+
+# Ignore instance folder (used for local configurations in Flask)
+instance/
+
+# IDE and editor settings
+.vscode/
+.idea/
+
+# System files
+.DS_Store
+Thumbs.db

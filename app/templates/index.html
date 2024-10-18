@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Personas{% endblock %}
+
+{% block content %}
+    <h2>Lista de Personas</h2>
+    <a href="{{ url_for('main.create_persona') }}">Crear Nueva Persona</a>
+    <ul>
+    {% for persona in personas %}
+        <li>
+            {{ persona.nombre }} ({{ persona.edad }} años) - {{ persona.correo }}
+            <a href="{{ url_for('main.update_persona', id=persona.id) }}">Editar</a>
+            <a href="{{ url_for('main.delete_persona', id=persona.id) }}">Eliminar</a>
+        </li>
+    {% endfor %}
+    </ul>
+{% endblock %}
