@@ -1,42 +1,67 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, current_app  # Importar current_app
+from flask import Blueprint, jsonify, request
 from .models import Persona
 
 main = Blueprint('main', __name__)
 
-# Leer todas las personas
-@main.route('/')
-def index():
-    personas = Persona.get_all(app=current_app)  # current_app es necesario aquí
-    return render_template('index.html', personas=personas)
+# Ruta para obtener todas las personas
+@main.route('/api/personas', methods=['GET'])
+def get_personas():
+    try:
+        personas = Persona.get_all()
+        return jsonify([persona.to_dict() for persona in personas])
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
-# Crear una nueva persona
-@main.route('/personas/nueva', methods=['GET', 'POST'])
+# Ruta para obtener una persona por ID
+@main.route('/api/personas/<int:id>', methods=['GET'])
+def get_persona(id):
+    try:
+        persona = Persona.get_by_id(id)
+        if persona:
+            return jsonify(persona.to_dict())
+        else:
+            return jsonify({'error': 'Persona no encontrada'}), 404
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+# Ruta para crear una nueva persona
+@main.route('/api/personas', methods=['POST'])
 def create_persona():
-    if request.method == 'POST':
-        nombre = request.form['nombre']
-        edad = request.form['edad']
-        correo = request.form['correo']
-        Persona.create(app=current_app, nombre=nombre, edad=edad, correo=correo)
-        flash('Persona creada con éxito')
-        return redirect(url_for('main.index'))
-    return render_template('create_persona.html')
+    try:
+        data = request.get_json()
+        nueva_persona = Persona(nombre=data['nombre'], edad=data['edad'], correo=data['correo'])
+        nueva_persona.save()
+        return jsonify(nueva_persona.to_dict()), 201
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
-# Actualizar una persona
-@main.route('/personas/editar/<int:id>', methods=['GET', 'POST'])
+# Ruta para actualizar una persona existente
+@main.route('/api/personas/<int:id>', methods=['PUT'])
 def update_persona(id):
-    persona = Persona.get_by_id(app=current_app, id=id)
-    if request.method == 'POST':
-        nombre = request.form['nombre']
-        edad = request.form['edad']
-        correo = request.form['correo']
-        Persona.update(app=current_app, id=id, nombre=nombre, edad=edad, correo=correo)
-        flash('Persona actualizada con éxito')
-        return redirect(url_for('main.index'))
-    return render_template('update_persona.html', persona=persona)
+    try:
+        persona = Persona.get_by_id(id)
+        if not persona:
+            return jsonify({'error': 'Persona no encontrada'}), 404
+        
+        data = request.get_json()
+        persona.nombre = data['nombre']
+        persona.edad = data['edad']
+        persona.correo = data['correo']
+        persona.update()
+        
+        return jsonify(persona.to_dict()), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
-# Eliminar una persona
-@main.route('/personas/eliminar/<int:id>')
+# Ruta para eliminar una persona
+@main.route('/api/personas/<int:id>', methods=['DELETE'])
 def delete_persona(id):
-    Persona.delete(app=current_app, id=id)
-    flash('Persona eliminada con éxito')
-    return redirect(url_for('main.index'))
+    try:
+        persona = Persona.get_by_id(id)
+        if not persona:
+            return jsonify({'error': 'Persona no encontrada'}), 404
+        
+        persona.delete()
+        return jsonify({'message': 'Persona eliminada correctamente'}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
