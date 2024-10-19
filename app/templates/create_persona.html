@@ -3,14 +3,21 @@
 {% block title %}Crear Persona{% endblock %}
 
 {% block content %}
-    <h2>Crear Persona</h2>
-    <form method="POST">
-        <label>Nombre</label>
-        <input type="text" name="nombre" required>
-        <label>Edad</label>
-        <input type="number" name="edad" required>
-        <label>Correo</label>
-        <input type="email" name="correo" required>
-        <button type="submit">Guardar</button>
-    </form>
+<h1>Crear Nueva Persona</h1>
+
+<form action="{{ url_for('main.create_persona') }}" method="POST">
+    <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="nombre" name="nombre" required>
+    </div>
+    <div class="mb-3">
+        <label for="edad" class="form-label">Edad</label>
+        <input type="number" class="form-control" id="edad" name="edad" required>
+    </div>
+    <div class="mb-3">
+        <label for="correo" class="form-label">Correo</label>
+        <input type="email" class="form-control" id="correo" name="correo" required>
+    </div>
+    <button type="submit" class="btn btn-success">Crear</button>
+</form>
 {% endblock %}
