@@ -39,25 +39,6 @@ Sigue estos pasos para configurar y ejecutar el proyecto en tu máquina local:
    cd projectBase-Oracle
    ```
 
-3. **Configura un entorno virtual:**
-
-   Es una buena práctica crear un entorno virtual para gestionar las dependencias de tu proyecto.
-
-   ```bash
-   python -m venv venv
-   ```
-
-4. **Activa el entorno virtual:**
-
-   - En Windows:
-     ```bash
-     venv\Scripts\activate
-     ```
-   - En MacOS/Linux:
-     ```bash
-     source venv/bin/activate
-     ```
-
 4. **Instala los paquetes de Python requeridos:**
 
    Instala las dependencias necesarias que se encuentran en el archivo `requirements.txt`.
@@ -72,10 +53,15 @@ Sigue estos pasos para configurar y ejecutar el proyecto en tu máquina local:
 
    Ejemplo de archivo `.env`:
    ```env
-   ORACLE_USERNAME=tu_usuario
-   ORACLE_PASSWORD=tu_contraseña
-   ORACLE_DSN=tu_dsn_base_de_datos
+   SECRET_KEY=mi_clave_secreta_super_secreta
+   ORACLE_USER=db272
+   ORACLE_PASSWORD=password123
+   ORACLE_HOST=localhost
+   ORACLE_PORT=1521
+   ORACLE_SERVICE_NAME=XEPDB1
+   FLASK_RUN_PORT=5000
    ```
+   > El ejemplo se encuentra en `.env.example`
 
 7. **Ejecuta la aplicación:**
 
@@ -85,7 +71,9 @@ Sigue estos pasos para configurar y ejecutar el proyecto en tu máquina local:
    flask run
    ```
 
-   La aplicación estará disponible en `http://127.0.0.1:5000/`.
+   La aplicación estará disponible por defecto en `http://127.0.0.1:5000/`
+
+   > El numero del puerto va a depender como esta configurado `FLASK_RUN_PORT` en el archivo `.env`
 
 ## Uso
 
@@ -101,18 +89,17 @@ Una vez que el servidor esté en funcionamiento, puedes acceder a las siguientes
 ```
 ├── app/
 │   ├── __init__.py
+│   ├── db.py
 │   ├── routes.py
 │   ├── models.py
 │   └── templates/
 │       └── *.html
-├── instance/
-│   └── config.py
-├── venv/
 ├── .gitignore
 ├── README.md
 └── requirements.txt
 ```
 
 - `app/`: Contiene la lógica de la aplicación, incluyendo rutas y modelos.
-- `instance/`: Se utiliza para almacenar la configuración local, como la URI de la base de datos.
 - `templates/`: Plantillas HTML para renderizar el front-end de la aplicación.
+
+> Si desea ver el proyecto estilizado con boostrap, ejecute el comando `git checkout base-boostrap`
