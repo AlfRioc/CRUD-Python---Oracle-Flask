@@ -196,5 +196,12 @@ Una vez que el servidor esté en funcionamiento, puedes acceder a las siguientes
 
 - Si desea ver el proyecto base (Por defecto) `git checkout main`
 
+[![image.png](https://i.postimg.cc/Tw6hLY3m/image.png)](https://postimg.cc/cKFdPWY4)
+
 - Si desea ver el proyecto estilizado con boostrap, ejecute el comando `git checkout base-boostrap`
+
+[![image.png](https://i.postimg.cc/sXCXbDFx/image.png)](https://postimg.cc/FfGNLvHX)
+
 - Si desea ver el proyecto base solo funcionando como backend para el consumo de APIs, ejecute el comando `git checkout api-crud`
+
+[![image.png](https://i.postimg.cc/SsHwgjH1/image.png)](https://postimg.cc/VrBG6sfX)
