@@ -6,17 +6,18 @@ Este proyecto es una aplicación CRUD (Crear, Leer, Actualizar, Eliminar) simple
 
 Para ejecutar este proyecto, necesitas tener instalados los siguientes elementos:
 
-- ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)  
+- ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
   Python es el lenguaje de programación utilizado para construir el proyecto. Se requiere la versión 3.7 o superior.
 
   - [Descargar Python](https://www.python.org/downloads/)
 
-- ![Oracle Database](https://img.shields.io/badge/Oracle-F80000?style=for-the-badge&logo=oracle&logoColor=white)  
+- ![Oracle Database](https://img.shields.io/badge/Oracle-F80000?style=for-the-badge&logo=oracle&logoColor=white)
   La aplicación utiliza una base de datos Oracle para el almacenamiento de datos - version 10g.
 
 - La aplicación necesita usar Instant Client Oracle para conectar con oracle.
-  - [Descargar Instant Client Oracle](https://www.python.org/downloads/)
-    > Agregar la ubicacion de la carpeta donde se extrajo al, añadirla a las variables de entorno en el `PATH`
+  - [Descargar Instant Client Oracle](https://drive.google.com/file/d/1vfpcGs7w5n2AqvpBdyM-QqXnF4_wMNAd/view?usp=sharing)
+
+  - [Configuración Instant Client Oracle](docs/ICOInstaller.md)
 
 ### Recomendaciones
 
